@@ -1,0 +1,1 @@
+uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)" --title="sys-monitor" -e btop

@@ -1,0 +1,2 @@
+#!/bin/bash
+uwsm-app -- xdg-terminal-exec --dir="$(omarchy-cmd-terminal-cwd)"
