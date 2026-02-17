@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+workspace_id=$(hyprctl activeworkspace -j | jq -r .id)
+
+hyprctl keyword "workspace $workspace_id, gapsout:10, gapsin:5, bordersize:2"
