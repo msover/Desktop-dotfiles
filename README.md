@@ -1,5 +1,1 @@
-# Desktop-dotfiles
-my desktop dotfiles for a default omarchy install
-
-extra themes:
-	rainynight
+Dotfiles for a custom arch install having quickshell as it's base
