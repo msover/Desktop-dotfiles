@@ -1,0 +1,30 @@
+filetype: qml
+
+detect:
+    filename: "\\.(qml|qmltypes)$"
+
+rules:
+    - comment:
+        start: "/\\*"
+        end: "\\*/"
+        rules:
+            - todo: "\\b(TODO|FIXME|NOTE|XXX):?\\b"
+    - comment: "(^|[[:space:]])//.*"
+
+    - constant.string: "\"(\\\\.|[^\"])*\"|'(\\\\.|[^'])*'"
+    - constant.number: "\\b[-+]?(0x[0-9a-fA-F]+|[0-9]+(\\.[0-9]+)?([eE][-+]?[0-9]+)?)\\b"
+    - constant.bool: "\\b(true|false)\\b"
+
+    - statement: "\\b(import|as|pragma|if|else|switch|case|default|for|while|do|break|continue|return|try|catch|finally|throw|new|delete|typeof|instanceof|in|of)\\b"
+    - statement: "\\b(property|signal|function|readonly|required|default|alias|var|let|const|enum|component|on)\\b"
+    - symbol.operator: "(===|!==|==|!=|<=|>=|&&|\\|\\||=>|[+\\-/*%=&|!<>?:.])"
+    - symbol.brackets: "[(){}\\[\\]]"
+
+    - type: "\\b(int|double|real|float|bool|string|url|date|color|list|point|size|rect|vector2d|vector3d|vector4d|quaternion|matrix4x4|font)\\b"
+    - type: "\\b[A-Z][A-Za-z0-9_]*\\b"
+
+    - identifier: "\\b(id|parent|children|width|height|x|y|z|visible|opacity|color|text|anchors|states|transitions|model|delegate|source)\\b"
+
+    - special: "\\b(null|undefined|this)\\b"
+    - indent-char.whitespace: "[[:space:]]+$"
+    - indent-char: "\t+ +| +\t+"
