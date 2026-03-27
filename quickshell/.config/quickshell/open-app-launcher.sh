@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+config_file="$(realpath "$script_dir/shell.qml")"
+
+instance_id="$(
+    quickshell list --all | awk -v config="$config_file" '
+        /^Instance / {
+            id = $2
+            sub(/:$/, "", id)
+        }
+        /^  Config path: / {
+            path = $0
+            sub(/^  Config path: /, "", path)
+            if (path == config) {
+                match_id = id
+            }
+        }
+        END {
+            if (match_id != "") {
+                print match_id
+            }
+        }
+    '
+)"
+
+if [[ -z "$instance_id" ]]; then
+    printf 'No running Quickshell instance found for %s\n' "$config_file" >&2
+    exit 1
+fi
+
+exec quickshell ipc -i "$instance_id" call app-launcher open

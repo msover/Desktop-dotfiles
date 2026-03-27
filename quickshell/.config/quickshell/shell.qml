@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 
 ShellRoot {
@@ -17,6 +18,24 @@ ShellRoot {
         id: wallpaperManager
         wallpaperTopColor: root.wallpaperTopColor
         wallpaperBottomColor: root.wallpaperBottomColor
+    }
+
+    AppLauncher {
+        id: appLauncher
+        textFont: root.textFont
+        iconFont: root.iconFont
+        surfaceColor: root.surfaceColor
+        accentColor: root.accentColor
+        mutedColor: root.mutedColor
+        textColor: root.textColor
+    }
+
+    IpcHandler {
+        target: "app-launcher"
+
+        function open(): void {
+            appLauncher.openLauncher();
+        }
     }
 
     StatusBar {
