@@ -1,0 +1,18 @@
+format = "$username$directory$character"
+
+[username]
+show_always = true
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+
+[directory]
+style = "bold cyan"
+truncate_to_repo = false
+format = "[$path]($style) "
+
+[character]
+success_symbol = "[❯](bold magenta)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
