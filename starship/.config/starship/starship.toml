@@ -1,4 +1,4 @@
-format = "$username$directory$character"
+format = "$username $directory$git_branch$git_status$character"
 
 [username]
 show_always = true
@@ -11,6 +11,23 @@ disabled = false
 style = "bold cyan"
 truncate_to_repo = false
 format = "[$path]($style) "
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+
+[git_status]
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "=${count}"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "\\$${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
 
 [character]
 success_symbol = "[❯](bold magenta)"
