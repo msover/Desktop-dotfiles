@@ -8,8 +8,8 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 [[ $- != *i* ]] && return
 
-#alias ls='ls --color=auto -al'
 alias grep='grep --color=auto'
+alias pwoff='poweroff'
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 # aliases that give omarchy looknfeel
