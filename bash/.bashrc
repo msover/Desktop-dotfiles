@@ -10,6 +10,8 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 alias grep='grep --color=auto'
 alias pwoff='poweroff'
+alias ripdrag='ripdrag -Axi'
+
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 # aliases that give omarchy looknfeel
