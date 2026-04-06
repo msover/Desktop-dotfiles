@@ -16,9 +16,9 @@ eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 # aliases that give omarchy looknfeel
 alias ls='eza -lha --group-directories-first --icons=auto'
-alias cat='bat'
+alias cat='bat --paging=never'
 
-
+bind -s 'set completion-ignore-case on'
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
