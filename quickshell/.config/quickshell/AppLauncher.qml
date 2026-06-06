@@ -144,7 +144,7 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 clip: true
-                model: filtered.values
+                model: filtered
                 currentIndex: filtered.values.length > 0 ? 0 : -1
                 keyNavigationWraps: true
                 preferredHighlightBegin: 0

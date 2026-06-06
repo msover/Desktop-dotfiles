@@ -3,7 +3,7 @@
 set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-config_file="$(realpath "$script_dir/shell.qml")"
+config_file="$script_dir/shell.qml"
 
 instance_id="$(
     quickshell list --all | awk -v config="$config_file" '
