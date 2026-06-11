@@ -1,2 +1,1 @@
-#!/bin/bash
-exec mise exec node@latest -- npx --yes @openai/codex "$@"
+/home/msover/.codex/packages/standalone/current/bin/codex

@@ -9,8 +9,9 @@ source ~/.local/share/omarchy/default/bash/rc
 #
 # Make an alias for invoking commands you use constantly
 # alias p='python'
+alias pdfviewer='evince'
 alias pwoff='poweroff'
-
+alias cat='bat --paging=never'
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"
