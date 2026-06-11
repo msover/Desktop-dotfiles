@@ -38,7 +38,16 @@ ShellRoot {
         }
     }
 
-    StatusBar {
+    ClockWidget {
+        textFont: root.textFont
+        iconFont: root.iconFont
+        surfaceColor: root.surfaceColor
+        accentColor: root.accentColor
+        mutedColor: root.mutedColor
+        textColor: root.textColor
+    }
+
+    WallpaperWidget {
         wallpaperManager: wallpaperManager
         textFont: root.textFont
         iconFont: root.iconFont
