@@ -56,4 +56,12 @@ ShellRoot {
         mutedColor: root.mutedColor
         textColor: root.textColor
     }
+
+    WorkspaceBar {
+        textFont: root.textFont
+        surfaceColor: root.surfaceColor
+        accentColor: root.accentColor
+        mutedColor: root.mutedColor
+        textColor: root.textColor
+    }
 }
