@@ -20,7 +20,7 @@ Window {
     property color accentColor: "#cba6f7"
     property color mutedColor: "#45475a"
     property color textColor: "#ffffff"
-    property real cornerRadius: 10
+    property real cornerRadius: 12
     property string query: ""
 
     function resetState() {
@@ -49,57 +49,62 @@ Window {
 
     Rectangle {
         anchors.fill: parent
+        anchors.margins: 0
         radius: appLauncher.cornerRadius
-        color: Qt.alpha(appLauncher.surfaceColor, 0.96)
-        border.width: 3
-        border.color: appLauncher.accentColor
+        color: Qt.alpha(appLauncher.surfaceColor, 0.98)
+        border.width: 1
+        border.color: Qt.alpha(appLauncher.accentColor, 0.4)
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: 18
+            anchors.margins: 16
             spacing: 12
 
+            // Search Bar Area
             Rectangle {
                 Layout.fillWidth: true
-                Layout.preferredHeight: implicitHeight
-                implicitHeight: input.implicitHeight + 8
-                radius: appLauncher.cornerRadius
-                color: Qt.alpha(appLauncher.mutedColor, 0.96)
+                Layout.preferredHeight: 52
+                radius: 8
+                color: Qt.alpha(appLauncher.mutedColor, 0.3)
+                border.width: 1
+                border.color: input.activeFocus ? Qt.alpha(appLauncher.accentColor, 0.8) : Qt.alpha(appLauncher.mutedColor, 0.5)
+
+                Behavior on border.color { ColorAnimation { duration: 150 } }
 
                 RowLayout {
                     anchors.fill: parent
-                    anchors.margins: 4
-                    spacing: 8
+                    anchors.leftMargin: 16
+                    anchors.rightMargin: 12
+                    spacing: 12
 
                     IconImage {
-                        Layout.leftMargin: 10
                         source: Quickshell.iconPath("nix-snowflake", true)
-                        Layout.preferredWidth: 25
-                        Layout.preferredHeight: 25
+                        Layout.preferredWidth: 24
+                        Layout.preferredHeight: 24
+                        Layout.alignment: Qt.AlignVCenter
+                        opacity: input.activeFocus ? 1.0 : 0.7
+                        Behavior on opacity { NumberAnimation { duration: 150 } }
                     }
 
                     TextField {
                         id: input
                         Layout.fillWidth: true
-                        placeholderText: "Run…"
-                        placeholderTextColor: appLauncher.textColor
+                        Layout.fillHeight: true
+                        placeholderText: "Search apps..."
+                        placeholderTextColor: Qt.alpha(appLauncher.textColor, 0.4)
                         font.family: appLauncher.textFont
-                        font.pixelSize: 18
+                        font.pixelSize: 16
                         color: appLauncher.textColor
-                        selectionColor: appLauncher.accentColor
-                        selectedTextColor: appLauncher.surfaceColor
+                        selectionColor: Qt.alpha(appLauncher.accentColor, 0.5)
+                        selectedTextColor: appLauncher.textColor
                         focus: appLauncher.visible
+                        verticalAlignment: TextInput.AlignVCenter
 
-                        padding: 15
+                        background: Item {} // Transparent background
 
                         onTextChanged: {
                             appLauncher.query = text;
                             list.currentIndex = filtered.values.length > 0 ? 0 : -1;
-                        }
-
-                        background: Rectangle {
-                            border.width: 0
-                            color: "transparent"
                         }
 
                         Keys.onEscapePressed: appLauncher.closeLauncher()
@@ -125,17 +130,31 @@ Window {
                 }
             }
 
+            // Divider
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 1
+                color: Qt.alpha(appLauncher.mutedColor, 0.3)
+            }
+
             ScriptModel {
                 id: filtered
                 values: {
                     const allEntries = [...DesktopEntries.applications.values];
                     const q = appLauncher.query.trim().toLowerCase();
 
+                    // Sort entries alphabetically
+                    let sortedEntries = allEntries.sort((a, b) => {
+                        const nameA = a.name || "";
+                        const nameB = b.name || "";
+                        return nameA.localeCompare(nameB);
+                    });
+
                     if (q === "") {
-                        return allEntries;
+                        return sortedEntries;
                     }
 
-                    return allEntries.filter(d => d.name && d.name.toLowerCase().includes(q));
+                    return sortedEntries.filter(d => d.name && d.name.toLowerCase().includes(q));
                 }
             }
 
@@ -150,11 +169,30 @@ Window {
                 preferredHighlightBegin: 0
                 preferredHighlightEnd: height
                 highlightRangeMode: ListView.ApplyRange
-                highlightMoveDuration: 80
-                highlight: Rectangle {
-                    radius: appLauncher.cornerRadius
-                    color: appLauncher.accentColor
-                    opacity: 0.2
+                highlightMoveDuration: 150
+                boundsBehavior: Flickable.StopAtBounds
+
+                highlight: Item {
+                    Rectangle {
+                        anchors.fill: parent
+                        anchors.leftMargin: 4
+                        anchors.rightMargin: 4
+                        anchors.topMargin: 2
+                        anchors.bottomMargin: 2
+                        radius: 6
+                        color: Qt.alpha(appLauncher.accentColor, 0.15)
+                        
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.topMargin: 8
+                            anchors.bottomMargin: 8
+                            width: 3
+                            radius: 1.5
+                            color: appLauncher.accentColor
+                        }
+                    }
                 }
 
                 delegate: Item {
@@ -162,7 +200,7 @@ Window {
                     required property var modelData
                     required property int index
                     width: ListView.view.width
-                    height: 42
+                    height: 48
 
                     MouseArea {
                         anchors.fill: parent
@@ -172,26 +210,27 @@ Window {
                         onDoubleClicked: appLauncher.launchSelected()
                     }
 
-                    Row {
+                    RowLayout {
                         anchors.fill: parent
-                        anchors.margins: 10
-                        spacing: 12
+                        anchors.leftMargin: 16
+                        anchors.rightMargin: 16
+                        spacing: 16
 
                         IconImage {
                             source: Quickshell.iconPath(modelData.icon, true)
-                            width: 22
-                            height: 22
+                            Layout.preferredWidth: 28
+                            Layout.preferredHeight: 28
+                            Layout.alignment: Qt.AlignVCenter
                         }
 
                         Text {
-                            id: label
-                            width: parent.width - 34
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
                             color: appLauncher.textColor
                             text: modelData.name
                             font.family: appLauncher.textFont
                             font.pixelSize: 15
                             elide: Text.ElideRight
-                            verticalAlignment: Text.AlignVCenter
                         }
                     }
                 }
