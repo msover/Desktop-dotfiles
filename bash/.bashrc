@@ -28,3 +28,7 @@ function y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+# >>> Codex installer >>>
+export PATH="/home/msover/.local/bin:$PATH"
+# <<< Codex installer <<<
