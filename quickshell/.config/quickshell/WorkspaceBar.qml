@@ -133,14 +133,26 @@ Variants {
                                 if (wsItem.hasWindows) return workspaceBarVariants.occupiedColor;
                                 return workspaceBarVariants.mutedColor;
                             }
+
+                            // Smooth color transition
+                            Behavior on color { ColorAnimation { duration: 250 } }
+
+                            // Pop out the active workspace slightly
+                            scale: wsItem.isActiveOnMonitor ? 1.15 : 1.0
+                            Behavior on scale {
+                                NumberAnimation { duration: 300; easing.type: Easing.OutBack }
+                            }
                             
                             Text {
                                 anchors.centerIn: parent
-                                text: parent.parent.visualNumber
-                                color: workspaceBarVariants.surfaceColor
+                                text: wsItem.visualNumber
+                                // Dark text on light background (active), light text otherwise
+								color: workspaceBarVariants.surfaceColor
                                 font.family: workspaceBarVariants.textFont
                                 font.bold: true
                                 font.pixelSize: 13
+
+                                Behavior on color { ColorAnimation { duration: 250 } }
                             }
                         }
                     }
