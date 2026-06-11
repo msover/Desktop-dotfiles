@@ -169,10 +169,21 @@ Window {
                 preferredHighlightBegin: 0
                 preferredHighlightEnd: height
                 highlightRangeMode: ListView.ApplyRange
-                highlightMoveDuration: 150
+                highlightFollowsCurrentItem: false
                 boundsBehavior: Flickable.StopAtBounds
 
                 highlight: Item {
+                    width: list.width
+                    height: 48
+                    y: list.currentItem ? list.currentItem.y : 0
+                    
+                    Behavior on y {
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.OutExpo
+                        }
+                    }
+
                     Rectangle {
                         anchors.fill: parent
                         anchors.leftMargin: 4
