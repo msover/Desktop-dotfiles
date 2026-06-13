@@ -137,7 +137,7 @@ Variants {
                     Text {
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
-                        width: parent.width - 94
+                        width: parent.width - 140
                         text: wallpaperWindow.statusText()
                         color: Qt.alpha(wallpaperWidget.textColor, 0.68)
                         font.pixelSize: 13
@@ -178,6 +178,36 @@ Variants {
                                 hoverEnabled: true
                                 cursorShape: previousButton.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
                                 onClicked: wallpaperWidget.wallpaperManager.cycle(-1)
+                            }
+                        }
+
+                        Rectangle {
+                            id: refreshButton
+
+                            width: 38
+                            height: 34
+                            radius: 9
+                            enabled: wallpaperWindow.hasManager
+                            color: refreshMouse.containsMouse && enabled ? Qt.alpha(wallpaperWidget.accentColor, 0.30) : Qt.alpha(wallpaperWidget.mutedColor, 0.74)
+                            border.color: enabled ? Qt.alpha(wallpaperWidget.accentColor, 0.52) : Qt.alpha(wallpaperWidget.mutedColor, 0.42)
+                            opacity: enabled ? 1.0 : 0.42
+
+                            Text {
+                                anchors.centerIn: parent
+                                text: "󰑓"
+                                color: wallpaperWidget.textColor
+                                font.pixelSize: 18
+                                font.family: wallpaperWidget.iconFont
+                            }
+
+                            MouseArea {
+                                id: refreshMouse
+
+                                anchors.fill: parent
+                                enabled: refreshButton.enabled
+                                hoverEnabled: true
+                                cursorShape: refreshButton.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                onClicked: wallpaperWidget.wallpaperManager.rescan()
                             }
                         }
 
