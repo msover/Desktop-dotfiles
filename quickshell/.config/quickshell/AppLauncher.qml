@@ -4,15 +4,23 @@ import QtQuick.Layouts
 import QtQuick.LocalStorage
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Wayland._WlrLayerShell
 
-Window {
+WlrLayershell {
     id: appLauncher
-    title: "App Launcher"
-    visible: false
-    flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
+    layer: WlrLayer.Overlay
+    exclusiveZone: -1
+    focusable: true
+    namespace: "app-launcher"
     color: "transparent"
-    width: 560
-    height: 360
+    visible: false
+
+    anchors {
+        top: true
+        bottom: true
+        left: true
+        right: true
+    }
 
     property string textFont: "JetBrainsMono Nerd Font"
     property string iconFont: textFont
@@ -29,7 +37,16 @@ Window {
         list.currentIndex = filtered.values.length > 0 ? 0 : -1;
     }
 
-    function openLauncher() {
+    function openLauncher(monitorName) {
+        if (monitorName) {
+            const allScreens = Quickshell.screens;
+            for (let i = 0; allScreens && i < allScreens.length; i++) {
+                if (allScreens[i].name === monitorName) {
+                    screen = allScreens[i];
+                    break;
+                }
+            }
+        }
         resetState();
         visible = true;
         Qt.callLater(() => input.forceActiveFocus());
@@ -47,13 +64,26 @@ Window {
         }
     }
 
-    Rectangle {
+    // Backdrop — clicking outside the panel closes the launcher
+    MouseArea {
         anchors.fill: parent
-        anchors.margins: 0
+        onClicked: appLauncher.closeLauncher()
+    }
+
+    // Centered launcher panel
+    Rectangle {
+        anchors.centerIn: parent
+        width: 560
+        height: 360
         radius: appLauncher.cornerRadius
         color: Qt.alpha(appLauncher.surfaceColor, 0.98)
         border.width: 1
         border.color: Qt.alpha(appLauncher.accentColor, 0.4)
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {} // absorb clicks so they don't reach the backdrop
+        }
 
         ColumnLayout {
             anchors.fill: parent
@@ -100,7 +130,7 @@ Window {
                         focus: appLauncher.visible
                         verticalAlignment: TextInput.AlignVCenter
 
-                        background: Item {} // Transparent background
+                        background: Item {}
 
                         onTextChanged: {
                             appLauncher.query = text;
@@ -143,7 +173,6 @@ Window {
                     const allEntries = [...DesktopEntries.applications.values];
                     const q = appLauncher.query.trim().toLowerCase();
 
-                    // Sort entries alphabetically
                     let sortedEntries = allEntries.sort((a, b) => {
                         const nameA = a.name || "";
                         const nameB = b.name || "";
@@ -176,7 +205,7 @@ Window {
                     width: list.width
                     height: 48
                     y: list.currentItem ? list.currentItem.y : 0
-                    
+
                     Behavior on y {
                         NumberAnimation {
                             duration: 200
@@ -192,7 +221,7 @@ Window {
                         anchors.bottomMargin: 2
                         radius: 6
                         color: Qt.alpha(appLauncher.accentColor, 0.15)
-                        
+
                         Rectangle {
                             anchors.left: parent.left
                             anchors.top: parent.top

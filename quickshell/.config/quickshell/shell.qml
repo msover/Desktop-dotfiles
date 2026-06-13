@@ -33,8 +33,8 @@ ShellRoot {
     IpcHandler {
         target: "app-launcher"
 
-        function open(): void {
-            appLauncher.openLauncher();
+        function open(monitorName: string): void {
+            appLauncher.openLauncher(monitorName);
         }
     }
 

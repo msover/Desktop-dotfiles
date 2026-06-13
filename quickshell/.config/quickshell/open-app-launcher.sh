@@ -3,7 +3,7 @@
 set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-config_file="$script_dir/shell.qml"
+config_file="$(readlink -f "$script_dir/shell.qml")"
 
 instance_id="$(
     quickshell list --all | awk -v config="$config_file" '
@@ -14,7 +14,10 @@ instance_id="$(
         /^  Config path: / {
             path = $0
             sub(/^  Config path: /, "", path)
-            if (path == config) {
+            cmd = "readlink -f " path
+            cmd | getline resolved
+            close(cmd)
+            if (resolved == config) {
                 match_id = id
             }
         }
@@ -31,4 +34,6 @@ if [[ -z "$instance_id" ]]; then
     exit 1
 fi
 
-exec quickshell ipc -i "$instance_id" call app-launcher open
+active_monitor="$(hyprctl activeworkspace -j | jq -r '.monitor')"
+
+exec quickshell ipc -i "$instance_id" call app-launcher open "$active_monitor"
