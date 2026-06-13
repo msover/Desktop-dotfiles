@@ -6,7 +6,7 @@ import Qt.labs.settings 1.0
 
 Scope {
     id: wallpaperManager
-
+    
     property color wallpaperTopColor: "#182238"
     property color wallpaperBottomColor: "#0d1119"
 
@@ -38,10 +38,7 @@ Scope {
         }
 
         return [
-            homeDirectory + "/Dotfiles/wallpapers",
-            # homeDirectory + "/Pictures/Wallpapers",
-            # homeDirectory + "/Pictures/wallpapers",
-            # homeDirectory + "/wallpapers"
+            homeDirectory + "/Dotfiles/wallpapers"
         ]
     }
 
