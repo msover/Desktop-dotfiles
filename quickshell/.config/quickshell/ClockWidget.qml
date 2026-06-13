@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Wayland._WlrLayerShell
+import Quickshell.Io
 import QtQuick
 
 Variants {
@@ -48,6 +49,11 @@ Variants {
             top: 24
         }
 
+        Process {
+            id: calendarProcess
+            command: ["gnome-calendar"]
+        }
+
         Component.onCompleted: refresh()
 
         Timer {
@@ -63,6 +69,27 @@ Variants {
             color: Qt.alpha(clockWidget.surfaceColor, 0.88)
             border.color: Qt.alpha(clockWidget.accentColor, 0.82)
             border.width: 2
+        }
+
+        Text {
+            width: 26
+            height: 26
+            text: "󰸗"
+            color: clockWidget.accentColor
+            font.pixelSize: 30
+            font.family: clockWidget.iconFont
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.rightMargin: 16
+            anchors.bottomMargin: 16
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: calendarProcess.running = true
+            }
         }
 
         Column {
