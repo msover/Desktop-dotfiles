@@ -38,9 +38,10 @@ Scope {
         }
 
         return [
-            homeDirectory + "/Pictures/Wallpapers",
-            homeDirectory + "/Pictures/wallpapers",
-            homeDirectory + "/wallpapers"
+            homeDirectory + "/Dotfiles/wallpapers",
+            # homeDirectory + "/Pictures/Wallpapers",
+            # homeDirectory + "/Pictures/wallpapers",
+            # homeDirectory + "/wallpapers"
         ]
     }
 
