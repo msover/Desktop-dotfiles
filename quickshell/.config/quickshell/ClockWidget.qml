@@ -51,7 +51,7 @@ Variants {
 
         Process {
             id: calendarProcess
-            command: ["gnome-calendar"]
+            command: ["morgen"]
         }
 
         Component.onCompleted: refresh()
