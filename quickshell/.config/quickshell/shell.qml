@@ -38,6 +38,11 @@ ShellRoot {
         }
     }
 
+    Process {
+        id: calendarProcess
+        command: ["morgen"]
+    }
+
     ClockWidget {
         textFont: root.textFont
         iconFont: root.iconFont
@@ -45,6 +50,7 @@ ShellRoot {
         accentColor: root.accentColor
         mutedColor: root.mutedColor
         textColor: root.textColor
+        onCalendarRequested: calendarProcess.running = true
     }
 
     WallpaperWidget {

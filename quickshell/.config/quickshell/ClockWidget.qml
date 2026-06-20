@@ -13,6 +13,8 @@ Variants {
     property color mutedColor: "#45475a"
     property color textColor: "#ffffff"
 
+    signal calendarRequested()
+
     model: Quickshell.screens
 
     delegate: WlrLayershell {
@@ -49,11 +51,6 @@ Variants {
             top: 24
         }
 
-        Process {
-            id: calendarProcess
-            command: ["morgen"]
-        }
-
         Component.onCompleted: refresh()
 
         Timer {
@@ -88,7 +85,7 @@ Variants {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: calendarProcess.running = true
+                onClicked: clockWidget.calendarRequested()
             }
         }
 
