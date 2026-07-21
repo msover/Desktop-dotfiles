@@ -70,4 +70,13 @@ ShellRoot {
         mutedColor: root.mutedColor
         textColor: root.textColor
     }
+
+    VolumeBar {
+        textFont: root.textFont
+        iconFont: root.iconFont
+        surfaceColor: root.surfaceColor
+        accentColor: root.accentColor
+        mutedColor: root.mutedColor
+        textColor: root.textColor
+    }
 }
