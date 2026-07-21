@@ -15,7 +15,8 @@ alias ripdrag='ripdrag -Axi'
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 # aliases that give omarchy looknfeel
-alias ls='eza -lha --group-directories-first --icons=auto'
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='eza -lha --group-directories-first --icons=auto'
 alias cat='bat --paging=never'
 alias ff='fastfetch'
 
