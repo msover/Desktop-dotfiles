@@ -1,5 +1,5 @@
 require("lua.monitors")
-require("lua.programs")
+require("lua.globals")
 require("lua.autostart")
 require("lua.env")
 require("lua.permissions")
