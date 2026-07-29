@@ -9,6 +9,7 @@ hl.bind("SUPER + B", hl.dsp.exec_cmd(browser))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen("fullscreen", "toggle"))
 hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots"))
 hl.bind("SUPER + Q", hl.dsp.exec_cmd(toggleClockUp))
+hl.bind("SUPER + L", hl.dsp.exec_raw("kitty --class blackscreen -e " .. blackscreen))
 
 hl.bind("SUPER + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))

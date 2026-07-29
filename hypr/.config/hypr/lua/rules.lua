@@ -30,3 +30,13 @@ local calculatorWR = hl.window_rule({
 	size = {680, 860},
 	move = {"50% - monitor_w * 0.5"," 50% - monitor_h * 0.5"},
 })
+
+local blackscreenWR = hl.window_rule ({
+	name = "blackscreen",
+	match = {
+		class = "^blackscreen$"
+	},
+	float = true,
+	opacity = 0.0,
+	border_size = 0,
+})
