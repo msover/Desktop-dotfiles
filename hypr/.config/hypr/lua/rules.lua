@@ -21,15 +21,6 @@ hl.window_rule({
     suppress_event = "maximize",
 })
 
-local appLauncherWR = hl.window_rule({
-	name = "app-launcher",
-	match = {
-		title = "^App Launcher$"
-	},
-	float = true,
-	move = {"monitor_w * 0.5", "monitor_h * 0.5"},
-})
-
 local calculatorWR = hl.window_rule({
 	name = "calc",
 	match = {
@@ -37,5 +28,5 @@ local calculatorWR = hl.window_rule({
 	},
 	float = true,
 	size = {680, 860},
-	move = {"monitor_w * 0.5", "monitor_h * 0.5"},
+	move = {"50% - monitor_w * 0.5"," 50% - monitor_h * 0.5"},
 })

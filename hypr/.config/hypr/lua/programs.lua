@@ -1,4 +1,4 @@
 terminal	= "kitty"
 filemgr   	= "nautilus"
-menu		= ".config/quickshell/open-app-launcher.sh"
+menu = [[quickshell ipc call app-launcher open "$(hyprctl activeworkspace -j | jq -r '.monitor')"]]
 browser		= "brave-origin"
