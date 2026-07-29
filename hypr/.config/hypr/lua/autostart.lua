@@ -1,0 +1,5 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("dbus-update-activation-environment --systemd ADW_DEBUG_COLOR_SCHEME QT_QPA_PLATFORMTHEME QT_STYLE_OVERRIDE")
+	hl.exec_cmd("hyprctl dispatch workspace 1 & quickshell")
+	hl.exec_cmd("wl-clip-persist --clipboard regular")
+end)

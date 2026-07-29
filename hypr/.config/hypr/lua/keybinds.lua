@@ -1,0 +1,55 @@
+hl.bind("SUPER + RETURN", hl.dsp.exec_cmd(terminal))
+hl.bind("SUPER + W", hl.dsp.window.close())
+hl.bind("SUPER + SHIFT + W", hl.dsp.window.kill())
+hl.bind("SUPER + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind("SUPER + SHIFT + RETURN", hl.dsp.exec_cmd(filemgr))
+hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(menu))
+hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))
+hl.bind("SUPER + B", hl.dsp.exec_cmd(browser))
+hl.bind("SUPER + F", hl.dsp.window.fullscreen("fullscreen", "toggle"))
+hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots"))
+
+hl.bind("SUPER + left",  hl.dsp.focus({ direction = "left" }))
+hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
+hl.bind("SUPER + up",    hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + down",  hl.dsp.focus({ direction = "down" }))
+
+hl.bind("SUPER + SHIFT + left",  hl.dsp.window.move({ direction = "left" }))
+hl.bind("SUPER + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind("SUPER + SHIFT + up",    hl.dsp.window.move({ direction = "up" }))
+hl.bind("SUPER + SHIFT + down",  hl.dsp.window.move({ direction = "down" }))
+
+hl.bind("SUPER + minus", hl.dsp.window.resize({ x = -50, y = 0, relative = true }))
+hl.bind("SUPER + equal", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
+hl.bind("SUPER + SHIFT + minus", hl.dsp.window.resize({ x = 0, y = -50, relative = true }))
+hl.bind("SUPER + SHIFT + equal", hl.dsp.window.resize({ x = 0, y = 50, relative = true }))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
+
+
+
+hl.bind("SUPER + 1", hl.dsp.focus({ workspace = 1 }))
+hl.bind("SUPER + 2", hl.dsp.focus({ workspace = 2 }))
+hl.bind("SUPER + 3", hl.dsp.focus({ workspace = 3 }))
+hl.bind("SUPER + 4", hl.dsp.focus({ workspace = 4 }))
+hl.bind("SUPER + 5", hl.dsp.focus({ workspace = 5 }))
+
+hl.bind("SUPER + F1", hl.dsp.focus({ workspace = 6 }))
+hl.bind("SUPER + F2", hl.dsp.focus({ workspace = 7 }))
+hl.bind("SUPER + F3", hl.dsp.focus({ workspace = 8 }))
+hl.bind("SUPER + F4", hl.dsp.focus({ workspace = 9 }))
+hl.bind("SUPER + F5", hl.dsp.focus({ workspace = 10 }))
+
+
+hl.bind("SUPER + SHIFT + 1", hl.dsp.window.move({ workspace = 1, follow = true }))
+hl.bind("SUPER + SHIFT + 2", hl.dsp.window.move({ workspace = 2, follow = true }))
+hl.bind("SUPER + SHIFT + 3", hl.dsp.window.move({ workspace = 3, follow = true }))
+hl.bind("SUPER + SHIFT + 4", hl.dsp.window.move({ workspace = 4, follow = true }))
+hl.bind("SUPER + SHIFT + 5", hl.dsp.window.move({ workspace = 5, follow = true }))
+
+hl.bind("SUPER + SHIFT + F1", hl.dsp.window.move({ workspace = 6, follow = true }))
+hl.bind("SUPER + SHIFT + F2", hl.dsp.window.move({ workspace = 7, follow = true }))
+hl.bind("SUPER + SHIFT + F3", hl.dsp.window.move({ workspace = 8, follow = true }))
+hl.bind("SUPER + SHIFT + F4", hl.dsp.window.move({ workspace = 9, follow = true }))
+hl.bind("SUPER + SHIFT + F5", hl.dsp.window.move({ workspace = 10, follow = true }))
