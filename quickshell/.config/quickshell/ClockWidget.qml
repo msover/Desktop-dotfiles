@@ -18,7 +18,7 @@ Variants {
     signal calendarRequested()
 
     function toggleLayer() {
-        layer = layer === WlrLayer.Bottom ? WlrLayer.Top : WlrLayer.Bottom
+        layer = layer === WlrLayer.Bottom ? WlrLayer.Overlay : WlrLayer.Bottom
     }
 
     model: Quickshell.screens

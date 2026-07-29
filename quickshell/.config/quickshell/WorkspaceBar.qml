@@ -20,7 +20,7 @@ Variants {
         required property var modelData
 
         screen: modelData
-        layer: WlrLayer.Top
+        layer: WlrLayer.Overlay
         namespace: "workspace-bar"
         exclusiveZone: 0
         focusable: false
