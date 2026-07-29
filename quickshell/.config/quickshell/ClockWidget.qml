@@ -13,7 +13,13 @@ Variants {
     property color mutedColor: "#45475a"
     property color textColor: "#ffffff"
 
+    property int layer: WlrLayer.Bottom
+
     signal calendarRequested()
+
+    function toggleLayer() {
+        layer = layer === WlrLayer.Bottom ? WlrLayer.Top : WlrLayer.Bottom
+    }
 
     model: Quickshell.screens
 
@@ -32,7 +38,7 @@ Variants {
         }
 
         screen: modelData
-        layer: WlrLayer.Bottom
+        layer: clockWidget.layer
         namespace: "quickshell-clock-widget"
         exclusionMode: ExclusionMode.Ignore
         exclusiveZone: 0

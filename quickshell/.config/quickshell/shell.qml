@@ -44,6 +44,7 @@ ShellRoot {
     }
 
     ClockWidget {
+        id: clockWidgetInstance
         textFont: root.textFont
         iconFont: root.iconFont
         surfaceColor: root.surfaceColor
@@ -51,6 +52,14 @@ ShellRoot {
         mutedColor: root.mutedColor
         textColor: root.textColor
         onCalendarRequested: calendarProcess.running = true
+    }
+
+    IpcHandler {
+        target: "clock-widget"
+
+        function toggleLayer(): void {
+            clockWidgetInstance.toggleLayer();
+        }
     }
 
     WallpaperWidget {
