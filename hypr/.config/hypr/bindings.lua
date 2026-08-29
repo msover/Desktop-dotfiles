@@ -10,11 +10,10 @@
 --   omarchy_default_bindings = false
 
 -- To disable all preinstalled app/webapp bindings, set:
---   omarchy_preinstalled_bindings = false
 
 -- Add a new binding.
 -- o.bind("SUPER + SHIFT + R", "SSH", "alacritty -e ssh your-server")
-
+-- o.bind("SUPER + B", "browser", "brave-origin-bin")
 -- Change an existing binding by unbinding it first, then binding the key again.
 -- This example changes SUPER+SPACE from the launcher to the Omarchy root menu.
 -- hl.unbind("SUPER + SPACE")
@@ -22,7 +21,10 @@
 
 -- Disable a default binding without replacing it.
 -- hl.unbind("SUPER + SHIFT + B")
-
+hl.unbind("SUPER + SHIFT + RETURN")
+hl.unbind("SUPER + SHIFT + BACKSPACE")
+o.bind("SUPER + B", nil, "omarchy-launch-browser")
+hl.bind("SUPER + SHIFT + W", hl.dsp.window.kill())
 -- Logitech MX Keys examples:
 -- o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
 -- o.bind("SUPER + H", nil, "voxtype record toggle")
