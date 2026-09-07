@@ -36,7 +36,7 @@ local blackscreenWR = hl.window_rule ({
 	match = {
 		class = "^blackscreen$"
 	},
-	float = true,
-	opacity = 0.0,
+	fullscreen = true,
+	opacity = "0.0",
 	border_size = 0,
 })
